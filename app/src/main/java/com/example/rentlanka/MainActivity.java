@@ -2,6 +2,7 @@ package com.example.rentlanka;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvWelcome, tvRole;
-    private Button btnLogout;
+    private Button btnLogout, btnAddVehicle, btnBrowseVehicles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         tvWelcome = findViewById(R.id.tvWelcome);
         tvRole = findViewById(R.id.tvRole);
         btnLogout = findViewById(R.id.btnLogout);
+        btnAddVehicle = findViewById(R.id.btnAddVehicle);
+        btnBrowseVehicles = findViewById(R.id.btnBrowseVehicles);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -34,8 +37,18 @@ public class MainActivity extends AppCompatActivity {
                         String role = doc.getString("role");
                         tvWelcome.setText("Welcome, " + name);
                         tvRole.setText("Role: " + role);
+
+                        if ("owner".equals(role) || "business".equals(role)) {
+                            btnAddVehicle.setVisibility(View.VISIBLE);
+                        }
                     });
         }
+
+        btnBrowseVehicles.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, VehicleListActivity.class)));
+
+        btnAddVehicle.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, AddVehicleActivity.class)));
 
         btnLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();

@@ -24,10 +24,25 @@
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnBrowseVehicles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:text="Browse Vehicles" />
+
+    <Button
+        android:id="@+id/btnAddVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Add Vehicle"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="Logout" />
 
 </LinearLayout>
